@@ -1,11 +1,8 @@
-# Use the base image provided by Kasmweb
-FROM kasmweb/kali-rolling-desktop:1.14.0
-
-# Set environment variables
-ENV VNC_PW=password
-
-# Expose the required port
-EXPOSE 6901
-
-# Start the container with the specified options
-CMD ["--shm-size=512m", "-p", "6901:6901", "-e", "VNC_PW=password"]
+# Build the Docker image using official Kali Linux repositories
+FROM kali:2021.4-slim-amd64
+# Set the container's working directory to / (root)
+WORKDIR /
+# Download and install the necessary packages for NoVNC
+RUN apt-get update && apt-get install -y novnc-client novnc-server
+# Start the NoVNC server on port 80
+CMD ["/usr/bin/nano-server", "--port=80"]
