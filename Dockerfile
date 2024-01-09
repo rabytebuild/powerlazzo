@@ -11,6 +11,7 @@ RUN apt-get update && \
     x11vnc \
     xvfb \
     fluxbox \
+    kali-desktop-gnome \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Set the VNC password for the root user
