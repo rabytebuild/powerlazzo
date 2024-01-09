@@ -1,5 +1,5 @@
 # Build the Docker image using official Kali Linux repositories
-FROM kali:2021.4-slim-amd64
+FROM kalilinux/kali-rolling
 # Set the container's working directory to / (root)
 WORKDIR /
 # Download and install the necessary packages for NoVNC
