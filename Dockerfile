@@ -14,11 +14,15 @@ RUN apt-get update && \
     kali-desktop-gnome \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Set the VNC password for the root user
-RUN x11vnc -storepasswd root /etc/x11vnc.pass
-
 # Expose port 80 for NoVNC
 EXPOSE 80
+
+# Set environment variables for VNC password
+ENV VNC_PASSWORD=root
+ENV VNC_PASSWD_PATH=/etc/x11vnc.pass
+
+# Use 'echo' to set the VNC password
+RUN echo "$VNC_PASSWORD" | x11vnc -storepasswd -f $VNC_PASSWD_PATH
 
 # Start the VNC server with password protection and NoVNC on port 80
 CMD ["x11vnc", "-forever", "-usepw", "-create", "-shared", "-display", ":0", "-bg", "-nopw", "-listen", "0.0.0.0", "-xkb"]
