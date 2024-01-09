@@ -12,7 +12,7 @@ RUN apt-get update && \
     x11vnc \
     xvfb \
     fluxbox \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Expose port 80 for NoVNC
 EXPOSE 80
